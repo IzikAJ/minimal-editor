@@ -1,9 +1,11 @@
 {
-  "name": "minimal-editor",
+  "name": "@izikaj/minimal-editor",
   "version": "0.0.1",
   "description": "Simple rich text editor oriented for grammarly chrome plugin work",
   "main": "lib/index.js",
-  "files": [],
+  "files": [
+    "lib"
+  ],
   "repository": "https://github.com/IzikAJ/minimal-editor",
   "homepage": "https://github.com/IzikAJ/minimal-editor",
   "scripts": {
