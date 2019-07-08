@@ -1,0 +1,48 @@
+{
+  "name": "minimal-editor",
+  "version": "0.0.1",
+  "description": "Simple rich text editor oriented for grammarly chrome plugin work",
+  "main": "lib/index.js",
+  "files": [],
+  "repository": "",
+  "homepage": "",
+  "scripts": {
+    "clean": "rm dist/*",
+    "start": "DEMO=true webpack-dev-server --color -d --mode development",
+    "build": "npm run clean && npm run build:prod",
+    "build:analyze": "ANALYZE=true npm run build",
+    "build:dev": "webpack -d --mode development",
+    "build:prod": "webpack -p --mode production",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "IzikAJ",
+  "license": "ISC",
+  "dependencies": {
+    "react": "^16.8.6",
+    "react-contenteditable": "^3.2.6",
+    "react-dom": "^16.8.6",
+    "styled-components": "^4.3.2",
+    "webpack-merge": "^4.2.1"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.4.4",
+    "@babel/core": "^7.4.5",
+    "@babel/plugin-proposal-class-properties": "^7.5.0",
+    "@babel/plugin-transform-arrow-functions": "^7.2.0",
+    "@babel/polyfill": "^7.4.4",
+    "@babel/preset-env": "^7.4.5",
+    "@babel/preset-react": "^7.0.0",
+    "@hot-loader/react-dom": "^16.8.6",
+    "babel-loader": "^8.0.6",
+    "css-loader": "^3.0.0",
+    "html-webpack-plugin": "^3.2.0",
+    "node-sass": "^4.12.0",
+    "react-hot-loader": "^4.12.3",
+    "sass-loader": "^7.1.0",
+    "style-loader": "^0.23.1",
+    "webpack": "^4.35.2",
+    "webpack-bundle-analyzer": "^3.3.2",
+    "webpack-cli": "^3.3.5",
+    "webpack-dev-server": "^3.7.2"
+  }
+}
