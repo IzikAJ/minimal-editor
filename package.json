@@ -4,7 +4,6 @@
   "description": "Simple rich text editor oriented for grammarly chrome plugin work",
   "main": "dist/minimal-editor.js",
   "files": [
-    "lib",
     "dist"
   ],
   "repository": "https://github.com/IzikAJ/minimal-editor",
@@ -12,7 +11,7 @@
   "scripts": {
     "clean": "rm dist/*",
     "start": "DEMO=true webpack-dev-server --color -d --mode development",
-    "build": "npm run clean && webpack -p --mode production",
+    "build": "NODE_ENV=production webpack -p --mode production",
     "build:analyze": "ANALYZE=true npm run build",
     "test": "echo \"Error: no test specified\" && exit 1"
   },

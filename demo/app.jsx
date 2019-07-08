@@ -1,7 +1,8 @@
 import { hot } from 'react-hot-loader/root'
 import React from 'react'
 
-import { Editor } from '../lib'
+import Editor from '../lib'
+// import Editor from '../dist/minimal-editor'
 
 export const App = hot(() => (
   <React.Fragment>
