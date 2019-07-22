@@ -5,6 +5,7 @@ const presets = [
 
 const plugins = [
   ['@babel/plugin-proposal-class-properties', { loose: true }],
+  '@babel/plugin-proposal-optional-chaining',
 ];
 
 const development = {

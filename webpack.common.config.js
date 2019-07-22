@@ -20,7 +20,13 @@ const config = {
       {
         test: /\.(jsx?)$/,
         use: 'babel-loader',
-        exclude: /node_modules/
+        exclude: /node_modules/,
+      },
+      {
+        test: /\.(woff|woff2|svg)$/,
+        use: 'file-loader',
+        include: /vendor/,
+        exclude: /node_modules/,
       },
       {
         test: /\.s?(a|c)ss$/,
@@ -32,7 +38,7 @@ const config = {
       },
       {
         test: /\.svg$/,
-        use: 'file-loader'
+        use: 'file-loader',
       }
     ]
   },
