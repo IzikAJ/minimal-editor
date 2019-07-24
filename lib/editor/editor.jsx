@@ -14,7 +14,7 @@ const ContentEditableWrapper = styled.div`
   margin: 0 auto;
 
   .ContentEditable {
-    min-height: 100px;
+    min-height: 200px;
     display: block;
     outline: none;
     margin: 0;
