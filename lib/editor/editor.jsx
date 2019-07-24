@@ -29,12 +29,18 @@ const ContentEditableWrapper = styled.div`
 export class Editor extends React.Component {
   constructor() {
     super()
-    this.contentEditable = React.createRef();
-    this.handleChange = this.handleChange.bind(this);
-    this.handleBlur = this.handleBlur.bind(this);
-    this.handleFocus = this.handleFocus.bind(this);
+    this.contentEditable = React.createRef()
+    this.handleChange = this.handleChange.bind(this)
+    this.handleBlur = this.handleBlur.bind(this)
+    this.handleFocus = this.handleFocus.bind(this)
+    this.handleCaretPosition = this.handleCaretPosition.bind(this)
+    this.pushRefreshCaretPosition = this.pushRefreshCaretPosition.bind(this)
+    this.forcedRevisionUpdate = this.forcedRevisionUpdate.bind(this)
+    this.handleSelectionChange = this.handleSelectionChange.bind(this)
+    this.updateTimerId = undefined
     this.state = {
       selection: undefined,
+      revision: 1,
       html: `
         <p>Deer stuar, selswair checker for mine</p>
         <p>I wanna do it</p>
@@ -44,9 +50,9 @@ export class Editor extends React.Component {
   }
 
   handleChange(evt) {
-    console.log("handleChange ContentEditable", evt.target.value);
-
-    this.setState({ html: evt.target.value });
+    // console.log("handleChange ContentEditable", evt.target.value);
+    this.handleCaretPosition()
+    this.setState({ html: evt.target.value })
   }
 
   handleBlur(evt) {
@@ -55,26 +61,87 @@ export class Editor extends React.Component {
   }
 
   handleFocus(evt) {
+    this.handleCaretPosition(evt)
     const { selection } = this.state
     if (selection === undefined) return
     selection.restore()
   }
 
+  pushRefreshCaretPosition() {
+    this.updateTimerId = null
+    this.forcedRevisionUpdate()
+  }
+
+  handleCaretPosition(evt) {
+    const curr = (new Date()).getTime()
+    if (this.updateTimerId) {
+      clearTimeout(this.updateTimerId)
+    }
+    this.updateTimerId = setTimeout(this.pushRefreshCaretPosition, 300)
+  }
+
+  isInside(node, root) {
+    if (!node) return false
+    if (node.isSameNode(root)) return true
+    while (node = node.parentNode) {
+      if (node.isSameNode(root)) return true
+    }
+    return false
+  }
+
+  handleSelectionChange(evt) {
+    const root = this.contentEditable.current
+    const document = root && root.ownerDocument
+    if (!document) return
+
+    const selection = document.getSelection()
+    if (!selection) return
+    if (!this.isInside(selection.anchorNode, root)) return
+    if (!this.isInside(selection.extentNode, root)) return
+    this.handleCaretPosition(evt)
+  }
+
   componentDidMount() {
+    const root = this.contentEditable.current
+    const document = root && root.ownerDocument
+    document.addEventListener('selectionchange', this.handleSelectionChange, false)
+
     this.setState({ mounted: true })
   }
 
   componentWillUnmount() {
+    const root = this.contentEditable.current
+    const document = root && root.ownerDocument
+    document.removeEventListener('selectionchange', this.handleSelectionChange, false)
+
     this.setState({ mounted: false })
+  }
+
+  forcedRevisionUpdate() {
+    this.setState({ revision: this.state.revision + 1 })
+  }
+
+  renderPane() {
+    if (!this.state.mounted) return ''
+    const root = this.contentEditable.current
+    const document = root && root.ownerDocument
+    return (
+      <Pane
+        root={root}
+        document={document}
+        revision={this.state.revision}
+        onChange={this.forcedRevisionUpdate}
+      />
+    )
   }
 
   render() {
     return (
       <React.Fragment>
         <FontIconsStyles />
-        {
-          this.state.mounted && <Pane editor={this.contentEditable} />
-        }
+
+        {this.renderPane()}
+
         <ContentEditableWrapper>
           <ContentEditable
             innerRef={this.contentEditable}
@@ -83,6 +150,7 @@ export class Editor extends React.Component {
             onChange={this.handleChange}
             onBlur={this.handleBlur}
             onFocus={this.handleFocus}
+            onKeyDown={this.handleCaretPosition}
             tagName="div"
             className="ContentEditable"
           />
