@@ -1,6 +1,6 @@
 {
   "name": "@izikaj/minimal-editor",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "Simple rich text editor oriented for grammarly chrome plugin work",
   "main": "dist/minimal-editor.js",
   "files": [
@@ -13,6 +13,7 @@
     "start": "DEMO=true webpack-dev-server --color -d --mode development",
     "build": "NODE_ENV=production webpack -p --mode production",
     "build:analyze": "ANALYZE=true npm run build",
+    "publish": "npm publish --access public",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "IzikAJ",
