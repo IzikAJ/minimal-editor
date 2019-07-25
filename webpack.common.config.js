@@ -24,7 +24,7 @@ const config = {
       },
       {
         test: /\.(woff|woff2|svg)$/,
-        use: 'file-loader',
+        use: 'url-loader',
         include: /vendor/,
         exclude: /node_modules/,
       },
@@ -39,6 +39,7 @@ const config = {
       {
         test: /\.svg$/,
         use: 'file-loader',
+        exclude: /(node_modules|vendor)/,
       }
     ]
   },
