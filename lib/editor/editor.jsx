@@ -50,7 +50,7 @@ export class Editor extends React.Component {
   }
 
   handleChange(evt) {
-    // console.log("handleChange ContentEditable", evt.target.value);
+    console.log("handleChange ContentEditable", evt.target.value);
     this.handleCaretPosition()
     this.setState({ html: evt.target.value })
   }
@@ -117,8 +117,8 @@ export class Editor extends React.Component {
     this.setState({ mounted: false })
   }
 
-  forcedRevisionUpdate() {
-    this.setState({ revision: this.state.revision + 1 })
+  forcedRevisionUpdate(props = {}) {
+    this.setState({ ...props, revision: this.state.revision + 1 })
   }
 
   renderPane() {
