@@ -1,6 +1,6 @@
 {
   "name": "@izikaj/minimal-editor",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "description": "Simple rich text editor oriented for grammarly chrome plugin work",
   "main": "dist/minimal-editor.js",
   "files": [
