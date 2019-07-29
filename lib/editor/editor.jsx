@@ -137,14 +137,14 @@ export class Editor extends React.Component {
   }
 
   render() {
-    const Wrapper = this.props.customWrapper
+    const { customWrapper: Wrapper, ...props } = this.props
     return (
       <React.Fragment>
         <FontIconsStyles />
 
         {this.renderPane()}
 
-        <Wrapper>
+        <Wrapper {...props}>
           <ContentEditable
             innerRef={this.contentEditable}
             html={this.state.html}
