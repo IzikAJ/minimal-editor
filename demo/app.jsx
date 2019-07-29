@@ -1,21 +1,57 @@
 import { hot } from 'react-hot-loader/root'
 import React from 'react'
 
-import Editor from '../lib'
-// import Editor from '../dist/minimal-editor'
+import FullEditor from './FullEditorDemo'
+import ControllsInPortal from './ControllsInPortalDemo'
+import DropdownTest from './DropdownTestDemo'
+
 
 export const App = hot(() => (
   <React.Fragment>
     <div className="demo_wrapper">
-      <h1>
-        Simple Editor Demo
-      </h1>
+      <div className="header">
+        <h1>
+          Simple Editor Demo
+        </h1>
+        <i>
+          Just try typing some text in editor
+        </i>
+      </div>
 
-      <Editor />
+      <div className="item-header">
+        <h3>FullEditor</h3>
+      </div>
+      <FullEditor />
 
-      <i>
-        Just try typing some text in editor
-      </i>
+      <h3>ControllsInPortal</h3>
+      <ControllsInPortal />
+
+      <hr />
+
+      <h3>Dropdown Test</h3>
+      <DropdownTest />
+
+      <p>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Quasi aperiam esse, omnis id officiis suscipit necessitatibus alias vitae illo exercitationem! Culpa tempore nostrum reiciendis incidunt fugit excepturi qui! Fuga, voluptatum.
+      </p>
+      <p>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Quasi aperiam esse, omnis id officiis suscipit necessitatibus alias vitae illo exercitationem! Culpa tempore nostrum reiciendis incidunt fugit excepturi qui! Fuga, voluptatum.
+      </p>
+      <p>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Quasi aperiam esse, omnis id officiis suscipit necessitatibus alias vitae illo exercitationem! Culpa tempore nostrum reiciendis incidunt fugit excepturi qui! Fuga, voluptatum.
+      </p>
+      <p>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Quasi aperiam esse, omnis id officiis suscipit necessitatibus alias vitae illo exercitationem! Culpa tempore nostrum reiciendis incidunt fugit excepturi qui! Fuga, voluptatum.
+      </p>
+      <p>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Quasi aperiam esse, omnis id officiis suscipit necessitatibus alias vitae illo exercitationem! Culpa tempore nostrum reiciendis incidunt fugit excepturi qui! Fuga, voluptatum.
+      </p>
+      <p>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Quasi aperiam esse, omnis id officiis suscipit necessitatibus alias vitae illo exercitationem! Culpa tempore nostrum reiciendis incidunt fugit excepturi qui! Fuga, voluptatum.
+      </p>
+      <p>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Quasi aperiam esse, omnis id officiis suscipit necessitatibus alias vitae illo exercitationem! Culpa tempore nostrum reiciendis incidunt fugit excepturi qui! Fuga, voluptatum.
+      </p>
     </div>
   </React.Fragment>
 ));

@@ -1,7 +1,13 @@
 html, body {
   margin: 0;
   padding: 0;
+  // overflow: hidden;
+}
+
+.header,
+.item-header {
   overflow: hidden;
+  display: block;
 }
 
 .demo_wrapper {

@@ -1,34 +1,32 @@
 import React from 'react'
-import ContentEditable from 'react-contenteditable'
-import styled from 'styled-components'
+import PropTypes from 'prop-types'
 
 import { FontIconsStyles } from './FontIcons'
+import ContentEditable from './ContentEditable'
+import EditorWrapper from './EditorWrapper'
 import Pane from './Pane'
+
 import SaveSelection from '../utils/SaveSelection'
 
-const ContentEditableWrapper = styled.div`
-  border-radius: 4px;
-  border: 1px solid brown;
-
-  padding: 0.2em 1em;
-  margin: 0 auto;
-
-  .ContentEditable {
-    min-height: 200px;
-    display: block;
-    outline: none;
-    margin: 0;
-    padding: 0;
-    line-height: 2em;
-    p {
-      margin: 0;
-    }
-  }
-`
-
 export class Editor extends React.Component {
-  constructor() {
-    super()
+  static propTypes = {
+    onChange: PropTypes.func,
+    value: PropTypes.string,
+    controllsPane: PropTypes.elementType,
+    showControlls: PropTypes.bool,
+    readonly: PropTypes.bool,
+    customWrapper: PropTypes.elementType,
+  }
+
+  static defaultProps = {
+    controllsPane: Pane,
+    showControlls: true,
+    readonly: false,
+    customWrapper: EditorWrapper,
+  }
+
+  constructor(props) {
+    super(props)
     this.contentEditable = React.createRef()
     this.handleChange = this.handleChange.bind(this)
     this.handleBlur = this.handleBlur.bind(this)
@@ -41,18 +39,18 @@ export class Editor extends React.Component {
     this.state = {
       selection: undefined,
       revision: 1,
-      html: `
-        <p>Deer stuar, selswair checker for mine</p>
-        <p>I wanna do it</p>
-        <p>I wanna do it???</p>
-      `,
+      html: props.value || '',
     }
   }
 
   handleChange(evt) {
-    console.log("handleChange ContentEditable", evt.target.value);
     this.handleCaretPosition()
-    this.setState({ html: evt.target.value })
+    const { onChange } = this.props
+    const { value } = evt.target
+    if (typeof (onChange) === 'function') {
+      onChange.call(this, value)
+    }
+    this.setState({ html: value })
   }
 
   handleBlur(evt) {
@@ -122,11 +120,14 @@ export class Editor extends React.Component {
   }
 
   renderPane() {
+    if (!this.props.showControlls) return ''
     if (!this.state.mounted) return ''
     const root = this.contentEditable.current
     const document = root && root.ownerDocument
+    if (!(root && document)) return ''
+    const { controllsPane: Controlls } = this.props
     return (
-      <Pane
+      <Controlls
         root={root}
         document={document}
         revision={this.state.revision}
@@ -136,13 +137,14 @@ export class Editor extends React.Component {
   }
 
   render() {
+    const Wrapper = this.props.customWrapper
     return (
       <React.Fragment>
         <FontIconsStyles />
 
         {this.renderPane()}
 
-        <ContentEditableWrapper>
+        <Wrapper>
           <ContentEditable
             innerRef={this.contentEditable}
             html={this.state.html}
@@ -152,9 +154,8 @@ export class Editor extends React.Component {
             onFocus={this.handleFocus}
             onKeyDown={this.handleCaretPosition}
             tagName="div"
-            className="ContentEditable"
           />
-        </ContentEditableWrapper>
+        </Wrapper>
       </React.Fragment>
     );
   }

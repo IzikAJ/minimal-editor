@@ -1,14 +1,14 @@
 import React from 'react'
-import { DropDownItem } from './dropdown'
+import DropDownItem from './DropDownItem'
 
 const Line = ({ item, onClick, value }) => {
   return (
     <DropDownItem
-      key={item.id}
       active={value === item.value}
       onClick={onClick}
-      children={item.title}
-    />
+    >
+      <font size={item.value} children={item.title}/>
+    </DropDownItem>
   )
 }
 
