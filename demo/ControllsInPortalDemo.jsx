@@ -2,8 +2,9 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import styled from 'styled-components'
 
-import Editor from '../lib'
-import Pane from '../lib/editor/Pane'
+import Editor, { Pane } from '../lib'
+// import Editor, { Pane } from '../dist/minimal-editor'
+
 import FindOrCreateNode from '../lib/utils/FindOrCreateNode'
 
 const portalNodeID = 'controllsInPortalDemoNodeID'
