@@ -154,8 +154,6 @@ export class Editor extends React.Component {
             onFocus={this.handleFocus}
             onKeyDown={this.handleCaretPosition}
             tagName="div"
-            minHeight={minHeight}
-            maxHeight={maxHeight}
           />
         </Wrapper>
       </React.Fragment>
