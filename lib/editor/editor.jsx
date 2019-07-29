@@ -137,14 +137,14 @@ export class Editor extends React.Component {
   }
 
   render() {
-    const { customWrapper: Wrapper, ...props } = this.props
+    const { customWrapper: Wrapper, minHeight, maxHeight, ...props } = this.props
     return (
       <React.Fragment>
         <FontIconsStyles />
 
         {this.renderPane()}
 
-        <Wrapper {...props}>
+        <Wrapper {...props} minHeight={minHeight} maxHeight={maxHeight}>
           <ContentEditable
             innerRef={this.contentEditable}
             html={this.state.html}
@@ -154,6 +154,8 @@ export class Editor extends React.Component {
             onFocus={this.handleFocus}
             onKeyDown={this.handleCaretPosition}
             tagName="div"
+            minHeight={minHeight}
+            maxHeight={maxHeight}
           />
         </Wrapper>
       </React.Fragment>
