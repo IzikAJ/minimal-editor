@@ -60,7 +60,12 @@ export class Editor extends React.Component {
 
   handleFocus(evt) {
     if (document.queryCommandValue('formatBlock') === '') {
+      console.log('force formatBlock to "p"')
       document.execCommand('formatBlock', false, 'p')
+    }
+    if (!document.queryCommandState('styleWithCss')) {
+      console.log('force styleWithCss to true')
+      document.execCommand('styleWithCss', false, true)
     }
     this.handleCaretPosition(evt)
     const { selection } = this.state
