@@ -3,6 +3,9 @@ import React from 'react'
 
 import FullEditor from './FullEditorDemo'
 import ControllsInPortal from './ControllsInPortalDemo'
+import EditorWithAds from './EditorWithAdsDemo'
+import EditorWithAds2 from './EditorWithAdsDemo2'
+
 import DropdownTest from './DropdownTestDemo'
 
 
@@ -25,6 +28,12 @@ export const App = hot(() => (
 
       <h3>ControllsInPortal</h3>
       <ControllsInPortal />
+
+      <h3>EditorWithAds</h3>
+      <EditorWithAds />
+
+      <h3>EditorWithAds2</h3>
+      <EditorWithAds2 />
 
       <hr />
 

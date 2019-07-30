@@ -4,6 +4,7 @@ import PropTypes from 'prop-types'
 import { FontIconsStyles } from './FontIcons'
 import ContentEditable from './ContentEditable'
 import EditorWrapper from './EditorWrapper'
+import TailWrapper from './TailWrapper'
 import Pane from './Pane'
 
 import SaveSelection from '../utils/SaveSelection'
@@ -16,6 +17,7 @@ export class Editor extends React.Component {
     showControlls: PropTypes.bool,
     readonly: PropTypes.bool,
     customWrapper: PropTypes.elementType,
+    tail: PropTypes.element,
   }
 
   static defaultProps = {
@@ -108,18 +110,12 @@ export class Editor extends React.Component {
   }
 
   componentDidMount() {
-    const root = this.contentEditable.current
-    const document = root && root.ownerDocument
     document.addEventListener('selectionchange', this.handleSelectionChange, false)
-
     this.setState({ mounted: true })
   }
 
   componentWillUnmount() {
-    const root = this.contentEditable.current
-    const document = root && root.ownerDocument
     document.removeEventListener('selectionchange', this.handleSelectionChange, false)
-
     this.setState({ mounted: false })
   }
 
@@ -145,14 +141,19 @@ export class Editor extends React.Component {
   }
 
   render() {
-    const { customWrapper: Wrapper, minHeight, maxHeight, ...props } = this.props
+    const { customWrapper: Wrapper, minHeight, maxHeight, head, tail, ...props } = this.props
     return (
       <React.Fragment>
         <FontIconsStyles />
 
         {this.renderPane()}
 
-        <Wrapper {...props} minHeight={minHeight} maxHeight={maxHeight}>
+        <Wrapper
+          {...props}
+          minHeight={minHeight}
+          maxHeight={maxHeight}
+          tailHeight={this.state.tailHeight}
+        >
           <ContentEditable
             innerRef={this.contentEditable}
             html={this.state.html}
@@ -163,6 +164,7 @@ export class Editor extends React.Component {
             onKeyDown={this.handleCaretPosition}
             tagName="div"
           />
+          {tail && <TailWrapper children={tail} />}
         </Wrapper>
       </React.Fragment>
     );
