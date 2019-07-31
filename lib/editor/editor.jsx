@@ -119,6 +119,12 @@ export class Editor extends React.Component {
     this.setState({ mounted: false })
   }
 
+  componentWillReceiveProps(nextProps) {
+    if (this.state.html !== nextProps.value) {
+      this.setState({ html: nextProps.value })
+    }
+  }
+
   forcedRevisionUpdate(props = {}) {
     this.setState({ ...props, revision: this.state.revision + 1 })
   }
