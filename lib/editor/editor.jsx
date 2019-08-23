@@ -79,6 +79,9 @@ export class Editor extends React.Component {
     this.handleCaretPosition(evt)
     const { onChange } = this.props
     let value = evt.target.value
+    if (value === '') {
+      value = '<p><br></p>'
+    }
     if (!this.state.clean) {
       // const selection = SaveSelection(window, this.contentEditable.current)
       // setTimeout(later, 200, () => selection && selection.after())
@@ -93,8 +96,8 @@ export class Editor extends React.Component {
   componentWillReceiveProps(props) {
     if (props.value !== this.state.html) {
       const cleanState = this.sanitize(this.state.html)
-      console.log('componentWillReceiveProps', { cleanState, recived: props.value, isEq: (cleanState === props.value) })
       if (cleanState === props.value) return
+      // console.log('componentWillReceiveProps', { cleanState, recived: props.value, isEq: (cleanState === props.value) })
 
       this.setState({ html: props.value})
     }

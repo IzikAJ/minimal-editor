@@ -3,6 +3,7 @@ import React from 'react'
 
 import FullEditor from './FullEditorDemo'
 import ControllsInPortal from './ControllsInPortalDemo'
+import ControllsInTail from './ControllsInTailDemo'
 import SanitizeContent from './SanitizeContentDemo'
 import EditorWithAds from './EditorWithAdsDemo'
 import EditorWithAds2 from './EditorWithAdsDemo2'
@@ -29,6 +30,9 @@ export const App = hot(() => (
 
       <h3>ControllsInPortal</h3>
       <ControllsInPortal />
+
+      <h3>ControllsInTail</h3>
+      <ControllsInTail />
 
       <h3>SanitizeContent</h3>
       <SanitizeContent />
